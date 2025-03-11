@@ -17,7 +17,7 @@ Column Information:
 <br/>
 OBS: 
 <br/>
-YEAR: Indicates the year when the outage event occurred
+**YEAR:** Indicates the year when the outage event occurred
 <br/>
 MONTH: Indicates the month when the outage event occurred
 <br/>
