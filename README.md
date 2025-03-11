@@ -7,7 +7,8 @@ DSC 80 Final Project at UCSD
 <br/>
 <br/>
 **Question:** Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by experiment failure?
-<br/> * This question is significant as analyzing the differences in effects of causes of power outages can help inform solutions 
+<br/> &nbsp;  -  This dataset is important as it holds information for power outages across the US that can be used to identify patterns and make predictions for the potential consequences caused by future outages. 
+<br/> &nbsp;  -  This question is significant as analyzing the differences in effects of causes of power outages can help inform solutions to increase power outage preparedness and help scientists predict the consequences of certain power outages in relation to others. 
 <br/>
 <br/>
 **Rows:** 1534 
