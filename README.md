@@ -15,15 +15,15 @@ DSC 80 Final Project at UCSD
 <br/>
 **Column Information:**
 <br/>
-**OBS:** 
+_OBS:_
 <br/>
-**YEAR:** Indicates the year when the outage event occurred
+_YEAR:_ Indicates the year when the outage event occurred
 <br/>
 **MONTH:** Indicates the month when the outage event occurred
 <br/>
-U.S._STATE: Represents all the states in the continental U.S.
+**U.S._STATE:** Represents all the states in the continental U.S.
 <br/>
-CLIMATE.REGION: U.S. Climate regions as specified by National Centers for Environmental Information (nine climatically consistent regions in continental U.S.A.)
+**CLIMATE.REGION: U.S. Climate regions as specified by National Centers for Environmental Information (nine climatically consistent regions in continental U.S.A.)
 <br/>
 CAUSE.CATEGORY: Categories of all the events causing the major power outages
 <br/>
