@@ -3,7 +3,7 @@ DSC 80 Final Project at UCSD
 
 ### Introduction
 ```diff
-- text in red
+- Power Outages
 + text in green
 ! text in orange
 # text in gray
