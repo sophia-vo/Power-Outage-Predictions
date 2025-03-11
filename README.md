@@ -2,7 +2,7 @@
 DSC 80 Final Project at UCSD
 
 ### Introduction
-Dataset: Power Outages
+Dataset: Power Outages \n
 This dataset explores
 ### Data Cleaning and Exploratory Data Analysis
 ### Assessment of Missingness
