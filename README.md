@@ -2,24 +2,24 @@
 DSC 80 Final Project at UCSD
 
 ### Introduction
-Dataset: Power Outages
+**Dataset:** Power Outages
 <br/> &nbsp;  -  This dataset explores the major power outage data in the 48 contiguous states in the US from January 2000 to July 2016. 
 <br/>
 <br/>
-Question: Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by experiment failure?
-<br/>  &nbsp;  - This question is significant as analyzing the differences in effects of causes of power outages can help inform solutions 
+**Question:** Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by experiment failure?
+<br/> * This question is significant as analyzing the differences in effects of causes of power outages can help inform solutions 
 <br/>
 <br/>
-Rows: 1534 
+**Rows:** 1534 
 <br/>
 <br/>
-Column Information:
+**Column Information:**
 <br/>
-OBS: 
+**OBS:** 
 <br/>
 **YEAR:** Indicates the year when the outage event occurred
 <br/>
-MONTH: Indicates the month when the outage event occurred
+**MONTH:** Indicates the month when the outage event occurred
 <br/>
 U.S._STATE: Represents all the states in the continental U.S.
 <br/>
