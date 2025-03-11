@@ -2,7 +2,7 @@
 DSC 80 Final Project at UCSD
 
 ### Introduction
-Dataset: @@Power Outages
+Dataset: <font color="green"> Power Outages </font>
 <br/> 
 <br/> This dataset explores the major power outage data in the 48 contiguous states in the US from January 2000 to July 2016. 
 <br/>
