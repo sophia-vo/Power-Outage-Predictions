@@ -6,7 +6,7 @@ Dataset: Power Outages
 <br/> 
 <br/> This dataset explores the major power outage data in the 48 contiguous states in the US from January 2000 to July 2016. 
 <br/>
-<br/> &nbsp;  - 
+<br/>  &nbsp;  - 
 ```
 
 ### Data Cleaning and Exploratory Data Analysis
