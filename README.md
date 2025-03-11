@@ -39,9 +39,11 @@ _OUTAGE.START:_ This variable indicates the day of the year and the time of the 
 _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time of the day when power was restored to all the customers (as reported by the corresponding Utility in the region)
 
 
-
-
 ### Data Cleaning and Exploratory Data Analysis
+**Data Cleaning Steps:**
+<br/>
+1. Loaded the dataset into the notebook using only the columns specified in "Column Information"
+2. 
 ### Assessment of Missingness
 ### Hypothesis Testing
 ### Framing a Prediction Problem
