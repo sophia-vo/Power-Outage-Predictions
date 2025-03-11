@@ -42,8 +42,11 @@ _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time o
 ### Data Cleaning and Exploratory Data Analysis
 **Data Cleaning Steps:**
 <br/>
-1. Loaded the dataset into the notebook using only the columns specified in "Column Information"
-2. 
+1. Loaded the dataset into the notebook using only the columns specified in "Column Information" so that only the columns necessary to our analysis were included. 
+2. Dropped row zero and reset the index as it did not contain actual data just the units for the data displayed in the rest of the dataframe
+3. Set the index as an integer 'OBS' and dropped its column form so that the power outages could be properly identified and ordered for the analyses.
+4. Converted the original 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' columns to datetime form and combined them into one pd.Timestamp column (dropping both of the originals). This allowed for ease of analysis as now only one column had to be used for analysis instead of two. Additionally, the combination of these two columns make comparison between dates easier as is specifies the exact time an outage occured.
+5. Repeated step 4 with the 'OUTAGE.RESTORATION.DATE' AND 'OUTAGE.RESTORATION.TIME' to create the 'OUTAGE.RESTORATION' column to further ease analysis. 
 ### Assessment of Missingness
 ### Hypothesis Testing
 ### Framing a Prediction Problem
