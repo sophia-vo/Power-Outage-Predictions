@@ -7,7 +7,6 @@ Power outages can have significant economic and social impacts, affecting millio
 <br/>
 
 In this project, we analyze a dataset of major power outages in the U.S. to answer the question:
-
 <br/>
 "Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by equipment failure?"
 <br/>
@@ -85,7 +84,6 @@ This plot looks at the relationship between outage duration and month. The scatt
   height="600"
   frameborder="0"
 ></iframe>
-
 We computed the mean outage duration for each cause category across different climate regions. Then, we converted these values into percentages relative to the total outage duration. In most climate regions, severe weather contributes significantly to power outages. Fuel supply emergencies have a high impact in the East North Central (18.66%) and the South (9.60%), possibly due to extreme cold or supply chain issues. Equipment failure has a significant impact in the East North Central (14.52%), likely due to aging infrastructure or extreme weather-related wear and tear. The consistent percentage of outages due to severe weather suggests that power grids need better resilience against climate-related disruptions. Policymakers can use this data to prioritize investments in infrastructure upgrades, focusing on regions where certain outage causes are more prevalent.
 
 ### Assessment of Missingness
@@ -157,6 +155,7 @@ A p-value of 0.589 is much larger than the typical significance threshold of 0.0
 <br/>
 **Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.015, we reject the null hypothesis as the p-value is less than 0.05. Thus, we are 95% confident that there is a significant difference in outage duration between the cause of severe weather and equipment failure.
 <br/>
+
 **Graph:**
 <iframe
   src="assets/Emperical_Distribution.html"
