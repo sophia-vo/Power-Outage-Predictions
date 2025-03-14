@@ -86,6 +86,15 @@ This plot looks at the relationship between outage duration and month. The scatt
 <br/>
 <br/>
 **p-value**: 0.015
+**Graph:**
+<br/>
+<iframe
+  src="assets/Emperical_Distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+<br/>
 ### Framing a Prediction Problem
 ### Baseline Model
 ### Final Model
