@@ -5,10 +5,13 @@ DSC 80 Final Project at UCSD
 
 Power outages can have significant economic and social impacts, affecting millions of people across the United States. Understanding the factors that contribute to outage duration is important for improving infrastructure resilience and emergency response.
 <br/>
+
 In this project, we analyze a dataset of major power outages in the U.S. to answer the question:
+
 <br/>
 "Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by equipment failure?"
 <br/>
+
 This question is important because severe weather events, such as hurricanes and storms, are becoming more frequent due to climate change, while equipment failures continue to pose a challenge for power grids. By investigating whether these two causes lead to significantly different outage durations, we can help inform solutions to increase power outage preparedness and help scientists predict the consequences of certain power outages in relation to others. 
 <br/>
 
@@ -97,7 +100,7 @@ To analyze missingness dependency, we will choose a column with non-trivial miss
 
 To analyze the missingness of CUSTOMERS.AFFECTED, we will perform permutation tests to determine whether its missingness depends on other columns in the dataset. We hypothesize that the missingness of CUSTOMERS.AFFECTED may depend on CLIMATE.REGION, since different regions might have varying reporting standards or data collection processes. If missing values are more prevalent in certain regions, this would suggest a dependency. We also hypothesize that the missingness of CUSTOMERS.AFFECTED does not depend on RES.PRICE, as electricity prices are unlikely to directly affect whether CUSTOMERS.AFFECTED is reported.
 
-Dependency on CLIMATE.REGION:
+**Dependency on CLIMATE.REGION:**
 
 Null Hypothesis: The distribution of climate regions is the same for missing and non-missing values of "CUSTOMERS.AFFECTED".
 Alternative Hypothesis: The missingness of "CUSTOMERS.AFFECTED" is dependent of climate region.
@@ -116,7 +119,7 @@ P-value (0.0): Since the p-value is 0.0, we reject the null hypothesis.
 This means that the missingness of CUSTOMERS.AFFECTED depends on CLIMATE.REGION. The probability that CUSTOMERS.AFFECTED is missing is not random across different climate regions.
 Certain regions (e.g., Northeast, West) have a much higher proportion of missing values compared to others. This suggests that regional factors like data reporting standards, infrastructure, or climate-related outages could be influencing whether CUSTOMERS.AFFECTED is recorded. Since the missingness is tied to an observed variable (CLIMATE.REGION), this is an example of Missing at Random (MAR) rather than Not Missing at Random (NMAR).
 
-Independence from RES.PRICE
+**Independence from RES.PRICE:**
 
 Null Hypothesis: The missingness of CUSTOMERS.AFFECTED is independent of RES.PRICE.
 Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED depends on RES.PRICE.
