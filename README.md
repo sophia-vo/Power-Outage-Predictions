@@ -46,7 +46,18 @@ _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time o
 2. Dropped row zero and reset the index as it did not contain actual data just the units for the data displayed in the rest of the dataframe
 3. Set the index as an integer 'OBS' and dropped its column form so that the power outages could be properly identified and ordered for the analyses.
 4. Converted the original 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' columns to datetime form and combined them into one pd.Timestamp column (dropping both of the originals). This allowed for ease of analysis as now only one column had to be used for analysis instead of two. Additionally, the combination of these two columns make comparison between dates easier as is specifies the exact time an outage occured.
-5. Repeated step 4 with the 'OUTAGE.RESTORATION.DATE' AND 'OUTAGE.RESTORATION.TIME' columns to create the 'OUTAGE.RESTORATION' column to further ease analysis. 
+5. Repeated step 4 with the 'OUTAGE.RESTORATION.DATE' AND 'OUTAGE.RESTORATION.TIME' columns to create the 'OUTAGE.RESTORATION' column to further ease analysis.
+
+<br/>
+**Univariate Analysis:**
+<br/>
+<iframe
+  src="assets/file-name.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ### Assessment of Missingness
 ### Hypothesis Testing
 ### Framing a Prediction Problem
