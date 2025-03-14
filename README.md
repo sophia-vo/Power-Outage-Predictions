@@ -203,10 +203,10 @@ Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REG
 **Evaluation Metric:** RMSE
 <br/>
 
-**Null Hypothesis:** Our model is fair. Its precision for the number of customers affected by power outages in the northern climate region and the number of customers affected by power outages in the southern climate region are roughly the same, and any differences are due to random chance.
+**Null Hypothesis:** Our model is fair, the RMSE is the same for the North and South regions. Its precision for the number of customers affected by power outages in the northern climate region and the number of customers affected by power outages in the southern climate region are roughly the same, and any differences are due to random chance.
 <br/>
 
-**Alternative Hypothesis:** Our model is unfair. Its precision for the number of customers affected by power outages in the northern climate region is different than its precision for the number of customers affected by power outages in the southern climate region.
+**Alternative Hypothesis:** Our model is unfair, the RMSE is different for the North and South regions. Its precision for the number of customers affected by power outages in the northern climate region is different than its precision for the number of customers affected by power outages in the southern climate region.
 <br/>
 
 **Test Statistic:** Absolute Difference in RMSE
