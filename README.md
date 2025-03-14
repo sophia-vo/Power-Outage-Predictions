@@ -93,7 +93,6 @@ This plot looks at the relationship between outage duration and month. The scatt
 **Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.015, we reject the null hypothesis as the p-value is less than 0.05. Thus, we are 95% confident that there is a significant difference in outage duration between the cause of severe weather and equipment failure.
 <br/>
 **Graph:**
-<br/>
 <iframe
   src="assets/Emperical_Distribution.html"
   width="800"
@@ -102,6 +101,9 @@ This plot looks at the relationship between outage duration and month. The scatt
 ></iframe>
 
 ### Framing a Prediction Problem
+**Prediction Problem** Predicting the number of customers affected by an outage based on the cause category, the climate region, and the outage duration. 
+  - 
 ### Baseline Model
+
 ### Final Model
 ### Fairness Analysis
