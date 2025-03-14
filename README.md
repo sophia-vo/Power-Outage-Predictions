@@ -52,7 +52,7 @@ _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time o
 **Univariate Analysis:**
 <br/>
 <iframe
-  src="assets/file-name.html"
+  src="assets/univariate_plot.html"
   width="800"
   height="600"
   frameborder="0"
