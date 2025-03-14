@@ -86,15 +86,17 @@ This plot looks at the relationship between outage duration and month. The scatt
 <br/>
 <br/>
 **p-value**: 0.015
-**Graph:**
 <br/>
+<br/>
+**Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.015, we reject the null hypothesis as the p-value is less than 0.05. Thus, there is evidence of a significant difference in outage duration between the cause of severe weather and equipment failure. 
+**Graph:**
 <iframe
   src="assets/Emperical_Distribution.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-<br/>
+
 ### Framing a Prediction Problem
 ### Baseline Model
 ### Final Model
