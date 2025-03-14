@@ -209,7 +209,7 @@ Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REG
 **Alternative Hypothesis:** Our model is unfair. Its precision for the number of customers affected by power outages in the northern climate region is different than its precision for the number of customers affected by power outages in the southern climate region.
 <br/>
 
-**Test Statistic:** Absolute Difference in Means
+**Test Statistic:** Absolute Difference in RMSE
 <br/>
 
 **Significance Level:** 0.05
