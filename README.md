@@ -59,7 +59,7 @@ _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time o
 ></iframe>
 
 <br/>
-**bivariate Analysis:**
+**Bivariate Analysis:**
 <br/>
 <iframe
   src="assets/biivariate_plot.html"
