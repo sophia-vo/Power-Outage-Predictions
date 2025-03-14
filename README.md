@@ -98,7 +98,7 @@ To analyze missingness dependency, we will choose a column with non-trivial miss
 - MCAR (Missing Completely at Random): Missingness is independent of other columns and the missing values themselves.
 - MAR (Missing at Random): Missingness depends on other columns but not on the missing values themselves.
 
-To analyze the missingness of CUSTOMERS.AFFECTED, we will perform permutation tests to determine whether its missingness depends on other columns in the dataset. We hypothesize that the missingness of CUSTOMERS.AFFECTED may depend on CLIMATE.REGION, since different regions might have varying reporting standards or data collection processes. If missing values are more prevalent in certain regions, this would suggest a dependency. We also hypothesize that the missingness of CUSTOMERS.AFFECTED does not depend on MONTH, as the month in which an outage occurred should not influence whether customer impact data is missing.
+To analyze the missingness of CUSTOMERS.AFFECTED, we will perform permutation tests to determine whether its missingness depends on other columns in the dataset. We hypothesize that the missingness of CUSTOMERS.AFFECTED may depend on CLIMATE.REGION, since different regions might have varying reporting standards or data collection processes. If missing values are more prevalent in certain regions, this would suggest a dependency. We also hypothesize that the missingness of CUSTOMERS.AFFECTED does not depend on RES.PRICE, as electricity prices are unlikely to directly affect whether CUSTOMERS.AFFECTED is reported.
 
 Dependency on CLIMATE.REGION:
 
@@ -119,11 +119,23 @@ P-value (0.0): Since the p-value is 0.0, we reject the null hypothesis.
 This means that the missingness of CUSTOMERS.AFFECTED depends on CLIMATE.REGION. The probability that CUSTOMERS.AFFECTED is missing is not random across different climate regions.
 Certain regions (e.g., Northeast, West) have a much higher proportion of missing values compared to others. This suggests that regional factors like data reporting standards, infrastructure, or climate-related outages could be influencing whether CUSTOMERS.AFFECTED is recorded. Since the missingness is tied to an observed variable (CLIMATE.REGION), this is an example of Missing at Random (MAR) rather than Not Missing at Random (NMAR).
 
-Independence from MONTH
+Independence from RES.PRICE
 
-Null Hypothesis: The missingness of CUSTOMERS.AFFECTED is independent of MONTH.
-Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED depends on MONTH.
-Test Statistic: Difference in means for missing vs. non-missing values.
+Null Hypothesis: The missingness of CUSTOMERS.AFFECTED is independent of RES.PRICE.
+Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED depends on RES.PRICE.
+Test Statistic: Difference in means for missing vs. non-missing values (absolute difference in the average RES.PRICE between rows where CUSTOMERS.AFFECTED).
+
+Observed Difference in Means: 0.102
+P-value: 0.589
+
+<iframe
+  src="assets/MCAR_RES_PRICE.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+A p-value of 0.589 is much larger than the typical significance threshold of 0.05, so we fail to reject the null hypothesis. This means there is no strong evidence that the missingness of CUSTOMERS.AFFECTED is dependent on RES.PRICE. The missingness of CUSTOMERS.AFFECTED does not appear to be strongly related to the residential electricity price (RES.PRICE). This suggests that the missingness is likely Missing Completely At Random (MCAR) or Missing At Random (MAR) with respect to RES.PRICE. The probability of CUSTOMERS.AFFECTED being missing is not significantly influenced by the value of RES.PRICE.
 
 
 ### Hypothesis Testing
