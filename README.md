@@ -57,6 +57,8 @@ _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time o
   height="600"
   frameborder="0"
 ></iframe>
+<br/>
+This plot looks at the distribution of Outage Duration and shows that the distribution of durations is between 0 and 20 thousands. This means that most outages last under 20 thousand minutes. 
 
 <br/>
 **Bivariate Analysis:**
@@ -67,9 +69,23 @@ _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time o
   height="600"
   frameborder="0"
 ></iframe>
+<br/>
+This plot looks at the relationship between outage duration and month. The scatter plot shows that there is no significant relationship between the two variables. 
 
 ### Assessment of Missingness
 ### Hypothesis Testing
+**Null Hypothesis:** There is no significant difference between the outage duration for outages caused by severe weather and outage duration for outages caused by equipment failure.
+<br/>
+**Alternative Hypothesis:** There is a significant difference between the outage duration for outages caused by severe weather and outage duration for outages caused by equipment failure.
+<br/>
+<br/>
+**Test Statistic:** Difference in means
+<br/>
+<br/>
+**Significance Level:** 0.05
+<br/>
+<br/>
+**p-value**: 0.015
 ### Framing a Prediction Problem
 ### Baseline Model
 ### Final Model
