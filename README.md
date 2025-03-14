@@ -72,6 +72,10 @@ This plot looks at the distribution of Outage Duration and shows that the distri
 <br/>
 This plot looks at the relationship between outage duration and month. The scatter plot shows that there is no significant relationship between the two variables. 
 
+<br/>
+**Grouped Table:**
+<br/>
+
 ### Assessment of Missingness
 ### Hypothesis Testing
 **Null Hypothesis:** There is no significant difference between the outage duration for outages caused by severe weather and outage duration for outages caused by equipment failure.
@@ -107,12 +111,25 @@ This plot looks at the relationship between outage duration and month. The scatt
 <br/> &nbsp;  - We will build a multiclass classification classifier for both categorical variables (cause category and climate region) 
 
 **Response Variable:** The number of customers affected by the outage
+<br/> &nbsp;  - We chose this variable because it can help inform companies when determining what their losses would be due to a power outage. The number of customers affected by the outage influences their business because it affects the number of customers who interact with companies. 
+
+**Metric:**
 
 **Information needed at the time of prediction**
-
+<br/> &nbsp;  - 98qtuhluahlsh
 
 
 ### Baseline Model
+Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REGION, and OUTAGE.DURATION. Missing values are handled using mean imputation for numerical features with categorical features being filled with the mode. 
+
+**Features:**
+<br/> &nbsp;  - CAUSE.CATEGORY: Categorical
+<br/> &nbsp;  - CLIMATE.REGION: Categorical
+<br/> &nbsp;  - OUTAGE.DURATION: Numerical
+<br/>
+<br/> &nbsp;  - The categorical variables are encoded using a OneHotEncoder
+
+**Performance Evaluation:** safhalfuhdhsd
 
 ### Final Model
 ### Fairness Analysis
