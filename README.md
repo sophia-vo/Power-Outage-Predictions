@@ -58,6 +58,16 @@ _OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time o
   frameborder="0"
 ></iframe>
 
+<br/>
+**bivariate Analysis:**
+<br/>
+<iframe
+  src="assets/biivariate_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ### Assessment of Missingness
 ### Hypothesis Testing
 ### Framing a Prediction Problem
