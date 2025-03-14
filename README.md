@@ -80,9 +80,11 @@ This plot looks at the relationship between outage duration and month. The scatt
 <br/>
 <br/>
 **Test Statistic:** Difference in means
+  - This is a good choice for this comparison because we are assessing the difference in duration time between two separate, categorical, variables. 
 <br/>
 <br/>
 **Significance Level:** 0.05
+  - This is an appropriate significant level as it avoids too many false positives while still asserting confidence
 <br/>
 <br/>
 **p-value**: 0.015
