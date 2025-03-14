@@ -105,7 +105,7 @@ This plot looks at the relationship between outage duration and month. The scatt
 **Prediction Problem:** Predicting the number of customers affected by an outage based on the cause category, the climate region, and the outage duration. 
 <br/> &nbsp;  - This is a regression prediction problem as our output is numerical 
 <br/> &nbsp;  - We will build a multiclass classification classifier for both categorical variables (cause category and climate region) 
-<br/>
+
 **Response Variable:** The number of customers affected by the outage
 
 **Information needed at the time of prediction**
