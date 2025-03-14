@@ -76,6 +76,16 @@ This plot looks at the relationship between outage duration and month. The scatt
 <br/>
 **Grouped Table:**
 <br/>
+| CAUSE.CATEGORY                 | Central | East North Central | Northeast | Northwest | South | Southeast | Southwest | West | West North Central |
+|--------------------------------|---------|--------------------|-----------|-----------|-------|-----------|-----------|------|-------------------|
+| equipment failure             | 0.18%   | 14.52%             | 0.12%     | 0.39%     | 0.16% | 0.30%     | 0.06%     | 0.29% | 0.03%             |
+| fuel supply emergency         | 5.51%   | 18.66%             | 8.04%     | 0.00%     | 9.60% | 0.00%     | 0.04%     | 3.38% | 0.00%             |
+| intentional attack            | 0.19%   | 1.31%              | 0.11%     | 0.21%     | 0.18% | 0.28%     | 0.15%     | 0.47% | 0.01%             |
+| islanding                     | 0.07%   | 0.00%              | 0.48%     | 0.04%     | 0.27% | 0.00%     | 0.00%     | 0.12% | 0.04%             |
+| public appeal                 | 0.77%   | 0.40%              | 1.46%     | 0.49%     | 0.64% | 1.57%     | 1.25%     | 1.11% | 0.24%             |
+| severe weather                | 1.79%   | 2.44%              | 2.43%     | 2.66%     | 2.41% | 1.46%     | 6.36%     | 1.61% | 1.34%             |
+| system operability disruption | 1.48%   | 1.43%              | 0.42%     | 0.08%     | 0.48% | 0.09%     | 0.18%     | 0.20% | 0.00%             |
+
 We computed the mean outage duration for each cause category across different climate regions. Then, we converted these values into percentages relative to the total outage duration. In most climate regions, severe weather contributes significantly to power outages. Fuel supply emergencies have a high impact in the East North Central (18.66%) and the South (9.60%), possibly due to extreme cold or supply chain issues. Equipment failure has a significant impact in the East North Central (14.52%), likely due to aging infrastructure or extreme weather-related wear and tear. The consistent percentage of outages due to severe weather suggests that power grids need better resilience against climate-related disruptions. Policymakers can use this data to prioritize investments in infrastructure upgrades, focusing on regions where certain outage causes are more prevalent.
 
 ### Assessment of Missingness
