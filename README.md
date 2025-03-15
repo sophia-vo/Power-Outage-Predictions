@@ -305,7 +305,7 @@ $$
 
 This metric was chosen to measure the model's error in predicting the number of affected customers, with lower values indicating better performance. RMSE is relevant for building a regression model. F1 score is better suited for classification models. $R^2$ was not chosen because we are not modeling a linear relationship
 
-**Test RMSE**: 402480.15986081364
+**Test RMSE**: 402480.16
 
 ### Evaluating Model Generalization to Unseen Data
 
@@ -318,6 +318,8 @@ To ensure our model generalizes well to new, unseen data, we split our dataset i
 
 ### Final Model
 
+The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
+
 **Information needed at the time of prediction:**
 <br/> &nbsp;  - Month
 <br/> &nbsp;  - Outage Duration
@@ -326,45 +328,72 @@ To ensure our model generalizes well to new, unseen data, we split our dataset i
 
 These are all necessary at the time of prediction becasue they influence how many customers will can attend a business or company. The climate region is affected due to differences in weather and infrastructure. Additionally, the cause of the outage can influence any repair time neccessary. Further, the outage duration limits how many customers can attend to a business because the longer the outage lasts the less customers that business can serve. Finally, the month affects the number of customers affected because time of year can affect how many people are visiting businesses. 
 
-The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
+### Feature Engineering
 
-The hyperparameters we chose were n.estimators, max_depth, min_samples_leaf. We chose n_estimators because more trees can capture more patterns but slow down training. We chose max_depth because it prevents overly complex trees that overfit. We chose min_samples_leaf because it helps regularize by preventing small, unstable splits.
+**Log Transformation on** `OUTAGE.DURATION`**:** Since outage durations vary widely, applying log1p transformation helps normalize the distribution.
 
-The best performing hyperparameters were model__max_depth: 5, model__min_samples_leaf: 5,'model__n_estimators': 100. 
+**Standard Scaling on**`MONTH`**:** Keeping `MONTH` as a numerical feature but standardizing it to ensure consistency.
 
-The modeling algorithm chosen was a RandomForestClassifier which uses a multitude of decision trees to classify the data. 
+**One-Hot Encoding for Categorical Features:** Encoding `CAUSE.CATEGORY` and `CLIMATE.REGION`
 
-The final model made more accurate predictions than the baseline model. The RMSE of our baseline model was 443865.23 and the RMSE of our final model was 318011.48. Thus, the final model RMSE was significantly lower than the baseline model RMSE. Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
+**Imputation:**
+- `OUTAGE.DURATION`: Mean imputation.
+- `CAUSE.CATEGORY & CLIMATE.REGION`: Most frequent value (mode) imputation.
 
+The hyperparameters we chose were `n.estimators`, `max_depth`, `min_samples_leaf`. We chose `n_estimators` because more trees can capture more patterns but slow down training. We chose `max_depth` because it prevents overly complex trees that overfit. We chose `min_samples_leaf` because it helps regularize by preventing small, unstable splits.
 
+The best performing hyperparameters were `model__max_depth`: 5, `model__min_samples_leaf`: 5,`model__n_estimators`: 100. 
 
-### Fairness Analysis
+The modeling algorithm chosen was a `RandomForestClassifier` which uses a multitude of decision trees to classify the data. 
+
+**Root Mean Squared Error (RMSE)**: 318011.48
+
+The final model made more accurate predictions than the baseline model. The RMSE of our baseline model was 402480.16 and the RMSE of our final model was 318011.48. Thus, the final model RMSE was significantly lower than the baseline model RMSE. Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
+
+## Fairness Analysis
+
+To determine whether the model performs worse for one group compared to the other, we compare its predictive performance across different climate regions, specifically the Root Mean Squared Error (RMSE) between two groups:
 
 **Group X:** Northern Climate Region
-<br/>
 
 **Group Y:** Southern Climate Region
-<br/>
+
+*North*: Regions classified as East North Central, Northeast, Northwest.
+
+*South*: Regions classified as South, Southeast, Southwest.
+
+### Hypothesis
+We use a permutation test to statistically evaluate whether the difference in RMSE between the two groups is due to chance.
+
+**Null Hypothesis (H0):** Our model is fair, the RMSE is the same for the North and South regions. Its precision for the number of customers affected by power outages in the northern climate region and the number of customers affected by power outages in the southern climate region are roughly the same, and any differences are due to random chance.
+
+**Alternative Hypothesis (H1):** Our model is unfair, the RMSE is different for the North and South regions. Its precision for the number of customers affected by power outages in the northern climate region is different than its precision for the number of customers affected by power outages in the southern climate region.
 
 **Evaluation Metric:** RMSE
-<br/>
-
-**Null Hypothesis:** Our model is fair, the RMSE is the same for the North and South regions. Its precision for the number of customers affected by power outages in the northern climate region and the number of customers affected by power outages in the southern climate region are roughly the same, and any differences are due to random chance.
-<br/>
-
-**Alternative Hypothesis:** Our model is unfair, the RMSE is different for the North and South regions. Its precision for the number of customers affected by power outages in the northern climate region is different than its precision for the number of customers affected by power outages in the southern climate region.
-<br/>
 
 **Test Statistic:** Absolute Difference in RMSE
-<br/>
 
 **Significance Level:** 0.05
-<br/>
 
-**p_value:** 0.25
-<br/>
+### Computing the Observed Difference in RMSE
+We first compute the actual RMSE difference between the two groups using the final trained model:
 
-**Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.25, we fail to reject the null hypothesis as the p-value is greater than 0.05. Thus, we are 95% confident that there is no significant difference in the RMSE for the North and South Regions. There is evidence to state that our model is fair. 
+1. Compute predictions on the test set.
+2. Compute separate RMSE values for the North and South regions.
+3. Calculate the absolute difference in RMSE.
+
+The observed RMSE difference is |South RMSE - North RMSE|.
+
+### Permutation Test
+
+1. Shuffle the region labels (North / South) randomly.
+2. Recompute RMSE for the shuffled groups.
+3. Repeat this process 1,000 times to generate a distribution of RMSE differences under the null hypothesis.
+4. Compute the p-value: The proportion of shuffled RMSE differences that are greater than or equal to the observed RMSE difference.
+
+**p_value:** 0.246
+
+**Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.246, we fail to reject the null hypothesis as the p-value is greater than 0.05. Thus, we are 95% confident that there is no significant difference in the RMSE for the North and South Regions, implying that any observed differences are likely due to random chance, and the model does not show significant bias. There is evidence to state that our model is fair. 
 <br/>
 
 **Visualization:** 
