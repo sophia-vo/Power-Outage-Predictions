@@ -189,7 +189,7 @@ The Total Variation Distance (TVD) between the distributions of `CLIMATE.REGION`
 P-value (0.0): Since the p-value is 0.0, we reject the null hypothesis.
 
 <iframe
-  src="assets/MAR_climate_region.html"
+  src="assets/MAR_CLIMATE_REGION.html"
   width="800"
   height="600"
   frameborder="0"
@@ -212,7 +212,7 @@ Certain regions (e.g., Northeast, West) have a much higher proportion of missing
 **P-value**: 0.564
 
 <iframe
-  src="assets/MCAR_res_price.html"
+  src="assets/MCAR_RES_PRICE.html"
   width="800"
   height="600"
   frameborder="0"
