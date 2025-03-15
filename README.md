@@ -63,13 +63,15 @@ Understanding the distribution of key variables is important for identifying tre
 
 **Distribution of Customers Affected**
 
-The histogram below shows the distribution of the number of customers affected by outages. The data is highly skewed, with most outages affecting a relatively small number of customers, while a few extreme cases impact millions. This right-skewed distribution suggests that a log transformation may be useful in modeling.
+The histogram below shows the distribution of the number of customers affected by outages. 
 <iframe
   src="assets/univariate1.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+The data is highly skewed, with most outages affecting a relatively small number of customers, while a few extreme cases impact millions. This right-skewed distribution suggests that a log transformation may be useful in modeling.
+
 To better visualize the majority of the data, we limit the x-axis range to 500,000 customers affected in the scaled version below:
 <iframe
   src="assets/univariate2.html"
@@ -99,7 +101,8 @@ To enhance visibility, we focus on outages lasting less than 10,000 minutes in t
 
 To better understand the relationships between key variables, we explore how **Outage Duration** varies across different causes and months. These insights will help identify trends and guide hypothesis testing.
 
-**Outage Duration vs. Cause Category**
+**Outage Duration vs. Cause Category:**
+
 The box plot below displays the distribution of **Outage Duration** across different **Cause Categories**. 
 
 We observe that **Fuel Supply Emergencies** have the longest median outage duration and the widest interquartile range (IQR), spanning approximately **0 to 20,000 minutes**, and **Severe Weather** has many high outliers, indicating that some storms cause extremely prolonged outages. Most cause categories have outage durations concentrated within **0-5,000 minutes**, suggesting that outages are typically short regardless of cause.
@@ -111,7 +114,7 @@ We observe that **Fuel Supply Emergencies** have the longest median outage durat
   frameborder="0"
 ></iframe>
 
-**Outage Duration vs. Month**
+**Outage Duration vs. Month:**
 
 The scatter plot below examines how Outage Duration changes by month. 
 <iframe
@@ -133,7 +136,7 @@ We observe that outage durations tend to peak around September and December, whe
 
 ### Interesting Aggregates
 
-To better understand how outage durations vary across different **Cause Categories** and **Climate Regions**, we created a pivot table displaying the **percentage of total outage duration** each combination contributes. The table below shows the percentage of total **outage duration** attributed to each **Cause Category** across different **Climate Regions**. This helps identify regional vulnerabilities to specific causes.
+To better understand how outage durations vary across different *Cause Categories* and *Climate Regions*, we created a pivot table displaying the percentage of total outage duration each combination contributes. The table below shows the percentage of total outage duration attributed to each Cause Category across different Climate Regions. This helps identify regional vulnerabilities to specific causes.
 
 | Central   | East North Central   | Northeast   | Northwest   | South   | Southeast   | Southwest   | West   | West North Central   |
 |:----------|:---------------------|:------------|:------------|:--------|:------------|:------------|:-------|:---------------------|
@@ -186,7 +189,8 @@ To analyze the missingness of `CUSTOMERS.AFFECTED`, we will perform permutation 
 
 The Total Variation Distance (TVD) between the distributions of `CLIMATE.REGION` for missing vs. non-missing `CUSTOMERS.AFFECTED` is 0.278, which indicates a significant difference between the two distributions.
 
-P-value (0.0): Since the p-value is 0.0, we reject the null hypothesis.
+**Total variation distance**: 0.28
+**p-value (0.0)**: Since the p-value is 0.0, we reject the null hypothesis.
 
 <iframe
   src="assets/MAR_CLIMATE_REGION.html"
@@ -257,7 +261,6 @@ To determine if this observed difference is statistically significant, we perfor
 **Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.015, we reject the null hypothesis as the p-value is less than 0.05. Thus, we are 95% confident that there is a significant difference in outage duration between the cause of severe weather and equipment failure.
 
 **Graph:**
-
 <iframe
   src="assets/HT.html"
   width="800"
@@ -301,9 +304,7 @@ We used a Random Forest Classifier with 100 estimators as our baseline model.
 ### Model Evaluation
 The model was trained on the processed dataset and evaluated using **Root Mean Squared Error (RMSE)** on the test set:
 
-$$
-\text{RMSE} = \sqrt{\frac{1}{n} \sum (y_{\text{true}} - y_{\text{pred}})^2}
-$$
+$$\text{RMSE} = \sqrt{\frac{1}{n} \sum (y_{\text{true}} - y_{\text{pred}})^2}$$
 
 This metric was chosen to measure the model's error in predicting the number of affected customers, with lower values indicating better performance. RMSE is relevant for building a regression model. F1 score is better suited for classification models. $R^2$ was not chosen because we are not modeling a linear relationship
 
@@ -330,7 +331,13 @@ No, this model is not good because:
 
 # Final Model
 
-The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
+The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. 
+
+Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. 
+
+Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. 
+
+Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
 
 **Information needed at the time of prediction:**
 <br/> &nbsp;  - Month
@@ -338,7 +345,9 @@ The features we added were Climate Region and Cause Category because both of the
 <br/> &nbsp;  - Climate Region
 <br/> &nbsp;  - Cause Category
 
-These are all necessary at the time of prediction becasue they influence how many customers will can attend a business or company. The climate region is affected due to differences in weather and infrastructure. Additionally, the cause of the outage can influence any repair time neccessary. Further, the outage duration limits how many customers can attend to a business because the longer the outage lasts the less customers that business can serve. Finally, the month affects the number of customers affected because time of year can affect how many people are visiting businesses. 
+These are all necessary at the time of prediction becasue they influence how many customers will can attend a business or company. The climate region is affected due to differences in weather and infrastructure. Additionally, the cause of the outage can influence any repair time neccessary. 
+
+Further, the outage duration limits how many customers can attend to a business because the longer the outage lasts the less customers that business can serve. Finally, the month affects the number of customers affected because time of year can affect how many people are visiting businesses. 
 
 
 ### Feature Engineering
@@ -363,18 +372,18 @@ The modeling algorithm chosen was a `RandomForestClassifier` which uses a multit
 
 The final model made more accurate predictions than the baseline model. The RMSE of our baseline model was 402480.16 and the RMSE of our final model was 318011.48. Thus, the final model RMSE was significantly lower than the baseline model RMSE. Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
 
-This model is generalizable because it improved on the baseline model, which was already generalizable to begin with due to the train-test split, but additionally, this model significantly lowered the RMSE furthering the generalizability because it measures how far the predictions are from the actual values. Thus, a lower RMSE displays more accuracy making the model more generalizable. Additionally, this model is generalizable due to the hyperparameter tuning with cross-validation because it tested the model on different subsets. Finally, once the best hyperparameters are found, the final model is retrained on the entire training set. Hence, the final model is generalizable. 
+This model is generalizable because it improved on the baseline model, which was already generalizable to begin with due to the train-test split, but additionally, this model significantly lowered the RMSE furthering the generalizability because it measures how far the predictions are from the actual values. Thus, a lower RMSE displays more accuracy making the model more generalizable. 
+
+Additionally, this model is generalizable due to the hyperparameter tuning with cross-validation because it tested the model on different subsets. Finally, once the best hyperparameters are found, the final model is retrained on the entire training set. Hence, the final model is generalizable. 
 
 # Fairness Analysis
 
 To determine whether the model performs worse for one group compared to the other, we compare its predictive performance across different climate regions, specifically the Root Mean Squared Error (RMSE) between two groups:
 
 **Group X:** Northern Climate Region
-
 **Group Y:** Southern Climate Region
 
 *North*: Regions classified as East North Central, Northeast, Northwest.
-
 *South*: Regions classified as South, Southeast, Southwest.
 
 ### Hypothesis
@@ -397,7 +406,7 @@ We first compute the actual RMSE difference between the two groups using the fin
 2. Compute separate RMSE values for the North and South regions.
 3. Calculate the absolute difference in RMSE.
 
-The observed RMSE difference is |South RMSE - North RMSE|.
+The observed RMSE difference is $|$ South RMSE - North RMSE $|$.
 
 ### Permutation Test
 
@@ -406,7 +415,7 @@ The observed RMSE difference is |South RMSE - North RMSE|.
 3. Repeat this process 1,000 times to generate a distribution of RMSE differences under the null hypothesis.
 4. Compute the p-value: The proportion of shuffled RMSE differences that are greater than or equal to the observed RMSE difference.
 
-**p_value:** 0.246
+**p-value:** 0.246
 
 **Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.246, we fail to reject the null hypothesis as the p-value is greater than 0.05. Thus, we are 95% confident that there is no significant difference in the RMSE for the North and South Regions, implying that any observed differences are likely due to random chance, and the model does not show significant bias. There is evidence to state that our model is fair. 
 <br/>
