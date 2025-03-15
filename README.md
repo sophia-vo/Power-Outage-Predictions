@@ -173,10 +173,17 @@ A p-value of 0.589 is much larger than the typical significance threshold of 0.0
 **Response Variable:** The number of customers affected by the outage
 <br/> &nbsp;  - We chose this variable because it can help inform companies when determining what their losses would be due to a power outage. The number of customers affected by the outage influences their business because it affects the number of customers who interact with companies. 
 
-**Metric:**
+**Metric:** RMSE
+<br/> &nbsp;  - This metric was chosen because we are building a regression model. F1 score is better suited for classification models. 
+<br/> &nbsp;  - R² was not chosen because we are not modeling a linear relationship
 
 **Information needed at the time of prediction**
-<br/> &nbsp;  - 98qtuhluahlsh
+<br/> &nbsp;  - Month
+<br/> &nbsp;  - Outage Duration
+<br/> &nbsp;  - Climate Region
+<br/> &nbsp;  - Cause Category
+
+These are all necessary at the time of prediction becasue they influence how many customers will can attend a business or company. The climate region is affected due to differences in weather and infrastructure. Additionally, the cause of the outage can influence any repair time neccessary. Further, the outage duration limits how many customers can attend to a business because the longer the outage lasts the less customers that business can serve. Finally, the month affects the number of customers affected because time of year can affect how many people are visiting businesses. 
 
 
 ### Baseline Model
@@ -189,7 +196,9 @@ Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REG
 <br/>
 <br/> &nbsp;  - The categorical variables are encoded using a OneHotEncoder
 
-**Performance Evaluation:** safhalfuhdhsd
+**Performance Evaluation:** 
+<br/> &nbsp;  - The RMSE of our baseline model was 443865.23 and the RMSE of our final model was 318011.48
+<br/> &nbsp;  - Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
 
 ### Final Model
 ### Fairness Analysis
