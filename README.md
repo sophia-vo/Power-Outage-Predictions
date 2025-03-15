@@ -304,9 +304,9 @@ We used a Random Forest Classifier with 100 estimators as our baseline model.
 ### Model Evaluation
 The model was trained on the processed dataset and evaluated using **Root Mean Squared Error (RMSE)** on the test set:
 
-$$\text{RMSE} = \sqrt{\frac{1}{n} \sum (y_{\text{true}} - y_{\text{pred}})^2}$$
+\[\text{RMSE} = \sqrt{\frac{1}{n} \sum (y_{\text{true}} - y_{\text{pred}})^2}\]
 
-This metric was chosen to measure the model's error in predicting the number of affected customers, with lower values indicating better performance. RMSE is relevant for building a regression model. F1 score is better suited for classification models. $R^2$ was not chosen because we are not modeling a linear relationship
+This metric was chosen to measure the model's error in predicting the number of affected customers, with lower values indicating better performance. RMSE is relevant for building a regression model. F1 score is better suited for classification models. \(R^2\) was not chosen because we are not modeling a linear relationship
 
 **Test RMSE**: 402480.16
 
@@ -381,9 +381,11 @@ Additionally, this model is generalizable due to the hyperparameter tuning with 
 To determine whether the model performs worse for one group compared to the other, we compare its predictive performance across different climate regions, specifically the Root Mean Squared Error (RMSE) between two groups:
 
 **Group X:** Northern Climate Region
+
 **Group Y:** Southern Climate Region
 
 *North*: Regions classified as East North Central, Northeast, Northwest.
+
 *South*: Regions classified as South, Southeast, Southwest.
 
 ### Hypothesis
@@ -406,7 +408,7 @@ We first compute the actual RMSE difference between the two groups using the fin
 2. Compute separate RMSE values for the North and South regions.
 3. Calculate the absolute difference in RMSE.
 
-The observed RMSE difference is $|$ South RMSE - North RMSE $|$.
+The observed RMSE difference is the absolute value of South RMSE - North RMSE.
 
 ### Permutation Test
 
