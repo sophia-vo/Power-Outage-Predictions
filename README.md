@@ -208,6 +208,7 @@ Certain regions (e.g., Northeast, West) have a much higher proportion of missing
 *Test Statistic*: Difference in means for missing vs. non-missing values (absolute difference in the average `RES.PRICE` between rows where `CUSTOMERS.AFFECTED`).
 
 **Observed Difference in Means**: 0.102
+
 **P-value**: 0.564
 
 <iframe
@@ -223,7 +224,8 @@ A p-value of 0.564 is much larger than the typical significance threshold of 0.0
 
 **Outage Duration and Cause Category:**  
 
-**Hypotheses**  
+**Hypotheses:**  
+
 - **Null Hypothesis (H0):** There is no difference in the mean outage duration between outages caused by severe weather and equipment failure. Any observed difference is due to random chance.  
 
 - **Alternative Hypothesis (H1):** The mean outage duration differs between outages caused by severe weather and equipment failure.  
@@ -265,18 +267,58 @@ To determine if this observed difference is statistically significant, we perfor
 
 ### Framing a Prediction Problem
 
-**Prediction Problem:** Predicting the number of customers affected by an outage based on the cause category, the climate region, and the outage duration. 
-<br/> &nbsp;  - This is a regression prediction problem as our output is numerical 
-<br/> &nbsp;  - We will build a multiclass classification classifier for both categorical variables (cause category and climate region) 
+**Prediction Problem:** Estimating the Number of Customers Affected by an Outage
 
-**Response Variable:** The number of customers affected by the outage
-<br/> &nbsp;  - We chose this variable because it can help inform companies when determining what their losses would be due to a power outage. The number of customers affected by the outage influences their business because it affects the number of customers who interact with companies. 
+**Problem Type:**
 
-**Metric:** RMSE
-<br/> &nbsp;  - This metric was chosen because we are building a regression model. F1 score is better suited for classification models. 
-<br/> &nbsp;  - R² was not chosen because we are not modeling a linear relationship
+This is a regression problem since `CUSTOMERS.AFFECTED` is a continuous numerical value. We aim to predict the number of customers impacted by a power outage based on available features at the time of prediction.
 
-**Information needed at the time of prediction**
+**Response Variable:** `CUSTOMERS.AFFECTED`, the number of customers affected by the outage
+
+We chose this variable because it can help inform companies when determining what their losses would be due to a power outage. The number of customers affected by the outage influences their business because it affects the number of customers who interact with companies. Understanding how many customers are affected by an outage is important for prioritizing emergency responses, resource allocation, and infrastructure improvements
+
+**Predictor Variables:**  
+
+- `OUTAGE.DURATION`: The length of the outage in minutes.  
+- `MONTH`: The month when the outage occurred (encoded as 1–12).  
+
+These features are known at the time of prediction as outage duration is recorded as soon as the event ends, and the month is always available. Since we only use features that are available at the time of prediction, this ensures our model can make realistic predictions in real-time scenarios.
+
+To establish a starting point for our prediction task, we will train a baseline model using two features: `OUTAGE.DURATION` (numerical) and `MONTH` (numerical). 
+
+### Feature Selection & Preprocessing
+**Numerical Features** (`OUTAGE.DURATION`, `MONTH`):  
+  - Missing values were imputed using the mean strategy.  
+  - Standardization was applied using `StandardScaler()` to normalize numerical values.  
+
+The preprocessing steps were implemented using a `Pipeline` and `ColumnTransformer`.
+
+### Model Choice
+We used a Random Forest Classifier with 100 estimators as our baseline model.
+
+### Model Evaluation
+The model was trained on the processed dataset and evaluated using **Root Mean Squared Error (RMSE)** on the test set:
+
+$$
+\text{RMSE} = \sqrt{\frac{1}{n} \sum (y_{\text{true}} - y_{\text{pred}})^2}
+$$
+
+This metric was chosen to measure the model's error in predicting the number of affected customers, with lower values indicating better performance. RMSE is relevant for building a regression model. F1 score is better suited for classification models. $R^2$ was not chosen because we are not modeling a linear relationship
+
+**Test RMSE**: 402480.15986081364
+
+### Evaluating Model Generalization to Unseen Data
+
+To ensure our model generalizes well to new, unseen data, we split our dataset into training and test sets to simulate real-world scenarios where the model encounters new data. The model is trained on `features_train` and evaluated on `features_test`.
+
+**Next Steps**  
+- Perform feature engineering, such as transforming `OUTAGE.DURATION` using a log transformation if needed.  
+- Train different regression models and compare performance using RMSE.  
+- Tune hyperparameters to optimize model performance.  
+
+### Final Model
+
+**Information needed at the time of prediction:**
 <br/> &nbsp;  - Month
 <br/> &nbsp;  - Outage Duration
 <br/> &nbsp;  - Climate Region
@@ -284,22 +326,6 @@ To determine if this observed difference is statistically significant, we perfor
 
 These are all necessary at the time of prediction becasue they influence how many customers will can attend a business or company. The climate region is affected due to differences in weather and infrastructure. Additionally, the cause of the outage can influence any repair time neccessary. Further, the outage duration limits how many customers can attend to a business because the longer the outage lasts the less customers that business can serve. Finally, the month affects the number of customers affected because time of year can affect how many people are visiting businesses. 
 
-
-### Baseline Model
-Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REGION, and OUTAGE.DURATION. Missing values are handled using mean imputation for numerical features with categorical features being filled with the mode. 
-
-**Features:**
-<br/> &nbsp;  - CAUSE.CATEGORY: Categorical
-<br/> &nbsp;  - CLIMATE.REGION: Categorical
-<br/> &nbsp;  - OUTAGE.DURATION: Numerical
-<br/>
-<br/> &nbsp;  - The categorical variables are encoded using a OneHotEncoder
-
-**Performance Evaluation:** 
-<br/> &nbsp;  - The RMSE of our baseline model was 443865.23 and the RMSE of our final model was 318011.48
-<br/> &nbsp;  - Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
-
-### Final Model
 The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
 
 The hyperparameters we chose were n.estimators, max_depth, min_samples_leaf. We chose n_estimators because more trees can capture more patterns but slow down training. We chose max_depth because it prevents overly complex trees that overfit. We chose min_samples_leaf because it helps regularize by preventing small, unstable splits.
@@ -308,9 +334,8 @@ The best performing hyperparameters were model__max_depth: 5, model__min_samples
 
 The modeling algorithm chosen was a RandomForestClassifier which uses a multitude of decision trees to classify the data. 
 
-The final model made more accurate predictions than the baseline model. The RMSE of our baseline model was 443865.23 and the RMSE of our final model was 318011.48. Thus, the final model RMSE was significantly lower than the baseline model RMSE. 
+The final model made more accurate predictions than the baseline model. The RMSE of our baseline model was 443865.23 and the RMSE of our final model was 318011.48. Thus, the final model RMSE was significantly lower than the baseline model RMSE. Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
 
-**Visualization:**
 
 
 ### Fairness Analysis
