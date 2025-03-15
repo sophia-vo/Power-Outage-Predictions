@@ -8,48 +8,57 @@ Power outages can have significant economic and social impacts, affecting millio
 
 In this project, we analyze a dataset of major power outages in the U.S. to answer the question:
 <br/>
-"Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by equipment failure?"
+**"Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by equipment failure?"**
 <br/>
 
-This question is important because severe weather events, such as hurricanes and storms, are becoming more frequent due to climate change, while equipment failures continue to pose a challenge for power grids. By investigating whether these two causes lead to significantly different outage durations, we can help inform solutions to increase power outage preparedness and help scientists predict the consequences of certain power outages in relation to others. 
+Severe weather events, such as hurricanes and storms, are becoming more frequent due to climate change, while equipment failures continue to pose a challenge for power grids. By investigating whether these two causes lead to significantly different outage durations, we can help inform solutions to increase power outage preparedness and help scientists predict the consequences of certain power outages in relation to others. 
 <br/>
 
 **Dataset:** Power Outages
+
 This dataset contains 1,534 rows and provides major power outage data in the 48 contiguous states in the US from January 2000 to July 2016. It holds information for power outages across the US that can be used to identify patterns and make predictions for the potential consequences caused by future outages. The key columns relevant to our analysis are:
 
 **Column Information:**
-<br/>
-_OBS:_ The number of the power outage
-<br/>
-_YEAR:_ Indicates the year when the outage event occurred
-<br/>
-_MONTH:_ Indicates the month when the outage event occurred
-<br/>
-_U.S._STATE:_ Represents all the states in the continental U.S.
-<br/>
-_CLIMATE.REGION:_ U.S. Climate regions as specified by National Centers for Environmental Information (nine climatically consistent regions in continental U.S.A.)
-<br/>
-_CAUSE.CATEGORY:_ Categories of all the events causing the major power outages
-<br/>
-_CAUSE.CATEGORY.DETAIL:_ Detailed description of the event categories causing the major power outages
-<br/>
-_OUTAGE.DURATION:_ Duration of outage events (in minutes)
-<br/>
-_CUSTOMERS.AFFECTED:_ Number of customers affected by the power outage event
-<br/>
-_OUTAGE.START:_ This variable indicates the day of the year and the time of the day when the outage event started (as reported by the corresponding Utility in the region)
-<br/>
-_OUTAGE.RESTORATION:_ This variable indicates the day of the year and the time of the day when power was restored to all the customers (as reported by the corresponding Utility in the region)
+
+| Column Name             | Description                                                                    |
+|:------------------------|:-------------------------------------------------------------------------------|
+| OBS                     | Observation number for tracking individual records.                            |
+| YEAR                    | The year in which the outage occurred.                                         |
+| MONTH                   | The month in which the outage occurred (1-12).                                 |
+| U.S._STATE              | The U.S. state where the outage occurred.                                      |
+| CLIMATE.REGION          | The climate region where the outage took place (e.g., Northeast, South, etc.). |
+| OUTAGE.START.DATE       | The date when the outage started.                                              |
+| OUTAGE.START.TIME       | The time when the outage started.                                              |
+| OUTAGE.RESTORATION.DATE | The date when power was restored.                                              |
+| OUTAGE.RESTORATION.TIME | The time when power was restored.                                              |
+| CAUSE.CATEGORY          | The general cause of the outage (e.g., severe weather, equipment failure).     |
+| CAUSE.CATEGORY.DETAIL   | A more detailed description of the specific cause of the outage.               |
+| OUTAGE.DURATION         | The total duration of the outage in hours.                                     |
+| CUSTOMERS.AFFECTED      | The number of customers impacted by the outage.                                |
+| RES.PRICE               | The residential electricity price in cents per kilowatt-hour.                  |
+| TOTAL.CUSTOMERS         | The total number of customers served in the affected area.                     |
 
 
 ### Data Cleaning and Exploratory Data Analysis
 **Data Cleaning Steps:**
 <br/>
-1. Loaded the dataset into the notebook using only the columns specified in "Column Information" so that only the columns necessary to our analysis were included. 
-2. Dropped row zero and reset the index as it did not contain actual data just the units for the data displayed in the rest of the dataframe
-3. Set the index as an integer 'OBS' and dropped its column form so that the power outages could be properly identified and ordered for the analyses.
-4. Converted the original 'OUTAGE.START.DATE' and 'OUTAGE.START.TIME' columns to datetime form and combined them into one pd.Timestamp column (dropping both of the originals). This allowed for ease of analysis as now only one column had to be used for analysis instead of two. Additionally, the combination of these two columns make comparison between dates easier as is specifies the exact time an outage occured.
-5. Repeated step 4 with the 'OUTAGE.RESTORATION.DATE' AND 'OUTAGE.RESTORATION.TIME' columns to create the 'OUTAGE.RESTORATION' column to further ease analysis.
+
+1. Reading the Data: Loaded the dataset into the notebook using only the columns specified in "Column Information" so that only the columns necessary to our analysis were included. This reduces unnecessary data and ensures efficient processing. We skipped the first five rows to exclude any metadata or headers that might be present in the original file.
+
+2. Indexing and Dropping Unnecessary Columns: The column `'OBS'` was used to create an index, converting it into integers for proper indexing. The `'OBS'` column was then dropped since it is no longer needed for analysis.
+
+3. Handling Date and Time Columns: Converted the original `'OUTAGE.START.DATE'` and `'OUTAGE.START.TIME'` columns to datetime form and combined them into one pd.Timestamp column (dropping both of the originals). This allowed for ease of analysis as now only one column had to be used for analysis instead of two. `'OUTAGE.START.TIME'` and `'OUTAGE.RESTORATION.TIME'` were converted to timedelta format to further ease analysis. A new 'OUTAGE.START' column was created by combining `'OUTAGE.START.DATE'` and `'OUTAGE.START.TIME'`. Similarly, `'OUTAGE.RESTORATION'` was created by merging `'OUTAGE.RESTORATION.DATE'` and `'OUTAGE.RESTORATION.TIME'`. These new columns provide precise timestamps of outage events. The original date and time columns were dropped, reducing redundancy and improving data clarity.
+
+The first few rows of the cleaned dataframe are below:
+
+|   OBS |   YEAR |   MONTH | U.S._STATE   | CLIMATE.REGION     | CAUSE.CATEGORY     | CAUSE.CATEGORY.DETAIL   |   OUTAGE.DURATION |   CUSTOMERS.AFFECTED |   RES.PRICE |   TOTAL.CUSTOMERS | OUTAGE.START        | OUTAGE.RESTORATION   |
+|------:|-------:|--------:|:-------------|:-------------------|:-------------------|:------------------------|------------------:|---------------------:|------------:|------------------:|:--------------------|:---------------------|
+|     1 |   2011 |       7 | Minnesota    | East North Central | severe weather     | nan                     |              3060 |                70000 |       11.6  |       2.5957e+06  | 2011-07-01 17:00:00 | 2011-07-03 20:00:00  |
+|     2 |   2014 |       5 | Minnesota    | East North Central | intentional attack | vandalism               |                 1 |                  nan |       12.12 |       2.64074e+06 | 2014-05-11 18:38:00 | 2014-05-11 18:39:00  |
+|     3 |   2010 |      10 | Minnesota    | East North Central | severe weather     | heavy wind              |              3000 |                70000 |       10.87 |       2.5869e+06  | 2010-10-26 20:00:00 | 2010-10-28 22:00:00  |
+|     4 |   2012 |       6 | Minnesota    | East North Central | severe weather     | thunderstorm            |              2550 |                68200 |       11.79 |       2.60681e+06 | 2012-06-19 04:30:00 | 2012-06-20 23:00:00  |
+|     5 |   2015 |       7 | Minnesota    | East North Central | severe weather     | nan                     |              1740 |               250000 |       13.07 |       2.67353e+06 | 2015-07-18 02:00:00 | 2015-07-19 07:00:00  |
+
 
 <br/>
 **Univariate Analysis:**
