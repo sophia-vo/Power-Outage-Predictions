@@ -314,7 +314,8 @@ To ensure our model generalizes well to new, unseen data, we split our dataset i
 **Next Steps**  
 - Perform feature engineering, such as transforming `OUTAGE.DURATION` using a log transformation if needed.  
 - Train different regression models and compare performance using RMSE.  
-- Tune hyperparameters to optimize model performance.  
+- Tune hyperparameters to optimize model performance.
+
 
 ### Final Model
 
@@ -327,6 +328,7 @@ The features we added were Climate Region and Cause Category because both of the
 <br/> &nbsp;  - Cause Category
 
 These are all necessary at the time of prediction becasue they influence how many customers will can attend a business or company. The climate region is affected due to differences in weather and infrastructure. Additionally, the cause of the outage can influence any repair time neccessary. Further, the outage duration limits how many customers can attend to a business because the longer the outage lasts the less customers that business can serve. Finally, the month affects the number of customers affected because time of year can affect how many people are visiting businesses. 
+
 
 ### Feature Engineering
 
@@ -349,6 +351,8 @@ The modeling algorithm chosen was a `RandomForestClassifier` which uses a multit
 **Root Mean Squared Error (RMSE)**: 318011.48
 
 The final model made more accurate predictions than the baseline model. The RMSE of our baseline model was 402480.16 and the RMSE of our final model was 318011.48. Thus, the final model RMSE was significantly lower than the baseline model RMSE. Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
+
+This model is generalizable because it improved on the baseline model, which was already generalizable to begin with due to the train-test split, but additionally, this model significantly lowered the RMSE furthering the generalizability because it measures how far the predictions are from the actual values. Thus, a lower RMSE displays more accuracy making the model more generalizable. Additionally, this model is generalizable due to the hyperparameter tuning with cross-validation because it tested the model on different subsets. Finally, once the best hyperparameters are found, the final model is retrained on the entire training set. Hence, the final model is generalizable. 
 
 ## Fairness Analysis
 
