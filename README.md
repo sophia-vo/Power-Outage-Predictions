@@ -311,7 +311,8 @@ This metric was chosen to measure the model's error in predicting the number of 
 
 ### Evaluating Model Generalization to Unseen Data
 
-To ensure our model generalizes well to new, unseen data, we split our dataset into training and test sets to simulate real-world scenarios where the model encounters new data. The model is trained on `features_train` and evaluated on `features_test`.
+To ensure our model generalizes well to new, unseen data, we split our dataset into training and test sets, using a train-test-split, to simulate real-world scenarios where the model encounters new data. The model is trained on `features_train` and evaluated on `features_test`- meaning that the model was trained on one set of data and evaluated on another. 
+
 
 **Next Steps**  
 - Perform feature engineering, such as transforming `OUTAGE.DURATION` using a log transformation if needed.  
