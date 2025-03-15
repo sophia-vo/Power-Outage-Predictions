@@ -201,6 +201,19 @@ Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REG
 <br/> &nbsp;  - Thus, this demonstrates that our final model is making more accurate predictions than our baseline model because the RMSE significantly decreased. 
 
 ### Final Model
+The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
+
+The hyperparameters we chose were n.estimators, max_depth, min_samples_leaf. We chose n_estimators because more trees can capture more patterns but slow down training. We chose max_depth because it prevents overly complex trees that overfit. We chose min_samples_leaf because it helps regularize by preventing small, unstable splits.
+
+The best performing hyperparameters were model__max_depth: 5, model__min_samples_leaf: 5,'model__n_estimators': 100. 
+
+The modeling algorithm chosen was a RandomForestClassifier which uses a multitude of decision trees to classify the data. 
+
+The final model made more accurate predictions than the baseline model. The RMSE of our baseline model was 443865.23 and the RMSE of our final model was 318011.48. Thus, the final model RMSE was significantly lower than the baseline model RMSE. 
+
+**Visualization:**
+
+
 ### Fairness Analysis
 
 **Group X:** Northern Climate Region
