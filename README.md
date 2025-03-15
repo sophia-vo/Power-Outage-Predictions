@@ -265,7 +265,7 @@ To determine if this observed difference is statistically significant, we perfor
   frameborder="0"
 ></iframe>
 
-### Framing a Prediction Problem
+## Framing a Prediction Problem
 
 **Prediction Problem:** Estimating the Number of Customers Affected by an Outage
 
@@ -283,6 +283,8 @@ We chose this variable because it can help inform companies when determining wha
 - `MONTH`: The month when the outage occurred (encoded as 1–12).  
 
 These features are known at the time of prediction as outage duration is recorded as soon as the event ends, and the month is always available. Since we only use features that are available at the time of prediction, this ensures our model can make realistic predictions in real-time scenarios.
+
+## Baseline Model
 
 To establish a starting point for our prediction task, we will train a baseline model using two features: `OUTAGE.DURATION` (numerical) and `MONTH` (numerical). 
 
@@ -317,7 +319,7 @@ To ensure our model generalizes well to new, unseen data, we split our dataset i
 - Tune hyperparameters to optimize model performance.
 
 
-### Final Model
+## Final Model
 
 The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
 
