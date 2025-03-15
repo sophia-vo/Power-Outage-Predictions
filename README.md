@@ -37,10 +37,9 @@ This dataset contains 1,534 rows and provides major power outage data in the 48 
 | TOTAL.CUSTOMERS         | The total number of customers served in the affected area.                     |
 
 
+
 # Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning Steps:
-<br/>
-
 1. Reading the Data: Loaded the dataset into the notebook using only the columns specified in "Column Information" so that only the columns necessary to our analysis were included. This reduces unnecessary data and ensures efficient processing. We skipped the first five rows to exclude any metadata or headers that might be present in the original file.
 
 2. Indexing and Dropping Unnecessary Columns: The column `'OBS'` was used to create an index, converting it into integers for proper indexing. The `'OBS'` column was then dropped since it is no longer needed for analysis.
@@ -151,6 +150,8 @@ To better understand how outage durations vary across different *Cause Categorie
 We computed the mean outage duration for each cause category across different climate regions. Then, we converted these values into percentages relative to the total outage duration. In most climate regions, severe weather contributes significantly to power outages. 
 
 Fuel supply emergencies have a high impact in the East North Central (18.66%) and the South (9.60%), possibly due to extreme cold or supply chain issues. Equipment failure has a significant impact in the East North Central (14.52%), likely due to aging infrastructure or extreme weather-related wear and tear. The consistent percentage of outages due to severe weather suggests that power grids need better resilience against climate-related disruptions. Policymakers can use this data to prioritize investments in infrastructure upgrades, focusing on regions where certain outage causes are more prevalent.
+
+
 
 # Assessment of Missingness
 
@@ -268,6 +269,8 @@ To determine if this observed difference is statistically significant, we perfor
   frameborder="0"
 ></iframe>
 
+
+
 # Framing a Prediction Problem
 
 **Prediction Problem:** Estimating the Number of Customers Affected by an Outage
@@ -286,6 +289,8 @@ We chose this variable because it can help inform companies when determining wha
 - `MONTH`: The month when the outage occurred (encoded as 1–12).  
 
 These features are known at the time of prediction as outage duration is recorded as soon as the event ends, and the month is always available. Since we only use features that are available at the time of prediction, this ensures our model can make realistic predictions in real-time scenarios.
+
+
 
 # Baseline Model
 
@@ -327,6 +332,7 @@ No, this model is not good because:
 - Perform feature engineering, such as transforming `OUTAGE.DURATION` using a log transformation if needed.  
 - Train different regression models and compare performance using RMSE.  
 - Tune hyperparameters to optimize model performance.
+
 
 
 # Final Model
@@ -375,6 +381,8 @@ The final model made more accurate predictions than the baseline model. The RMSE
 This model is generalizable because it improved on the baseline model, which was already generalizable to begin with due to the train-test split, but additionally, this model significantly lowered the RMSE furthering the generalizability because it measures how far the predictions are from the actual values. Thus, a lower RMSE displays more accuracy making the model more generalizable. 
 
 Additionally, this model is generalizable due to the hyperparameter tuning with cross-validation because it tested the model on different subsets. Finally, once the best hyperparameters are found, the final model is retrained on the entire training set. Hence, the final model is generalizable. 
+
+
 
 # Fairness Analysis
 
