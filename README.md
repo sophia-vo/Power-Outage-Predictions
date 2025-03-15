@@ -215,10 +215,10 @@ Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REG
 **Significance Level:** 0.05
 <br/>
 
-**p_value:** 
+**p_value:** 0.25
 <br/>
 
-**Conclusion:** 
+**Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.25, we fail to reject the null hypothesis as the p-value is greater than 0.05. Thus, we are 95% confident that there is no significant difference in the RMSE for the North and South Regions. There is evidence to state that our model is fair. 
 <br/>
 
 **Visualization:** 
