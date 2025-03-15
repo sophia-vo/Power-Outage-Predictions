@@ -1,6 +1,6 @@
-# Power-Outage-Predictions
+# Power Outage Predictions
 DSC 80 Final Project at UCSD
-<br/>
+
 ## Introduction
 
 Power outages can have significant economic and social impacts, affecting millions of people across the United States. Understanding the factors that contribute to outage duration is important for improving infrastructure resilience and emergency response.
@@ -8,13 +8,9 @@ Power outages can have significant economic and social impacts, affecting millio
 
 In this project, we analyze a dataset of major power outages in the U.S. to answer the question:
 
-
 **"Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by equipment failure?"**
 
-
-
 Severe weather events, such as hurricanes and storms, are becoming more frequent due to climate change, while equipment failures continue to pose a challenge for power grids. By investigating whether these two causes lead to significantly different outage durations, we can help inform solutions to increase power outage preparedness and help scientists predict the consequences of certain power outages in relation to others. 
-<br/>
 
 **Dataset:** Power Outages
 
@@ -68,16 +64,13 @@ Understanding the distribution of key variables is important for identifying tre
 **Distribution of Customers Affected**
 
 The histogram below shows the distribution of the number of customers affected by outages. The data is highly skewed, with most outages affecting a relatively small number of customers, while a few extreme cases impact millions. This right-skewed distribution suggests that a log transformation may be useful in modeling.
-
 <iframe
   src="assets/univariate1.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-
 To better visualize the majority of the data, we limit the x-axis range to 500,000 customers affected in the scaled version below:
-
 <iframe
   src="assets/univariate2.html"
   width="800"
@@ -88,16 +81,13 @@ To better visualize the majority of the data, we limit the x-axis range to 500,0
 **Distribution of Outage Duration**
 
 The histogram below represents the duration of power outages (in minutes). Similar to customers affected, outage durations are highly skewed, with most outages lasting for a short period while a few last significantly longer. This distribution suggests that extreme events, while rare, can have a significant impact.
-
 <iframe
   src="assets/univariate3.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-
 To enhance visibility, we focus on outages lasting less than 10,000 minutes in the adjusted histogram:
-
 <iframe
   src="assets/univariate4.html"
   width="800"
@@ -124,23 +114,19 @@ We observe that **Fuel Supply Emergencies** have the longest median outage durat
 **Outage Duration vs. Month**
 
 The scatter plot below examines how Outage Duration changes by month. 
-
 <iframe
   src="assets/bivariate2.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-
 For improved visibility a scaled graph with the median outage durations plotted is shown below:
-
 <iframe
   src="assets/bivariate3.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-
 The red line represents the median outage duration per month, showing fluctuations throughout the year.
 
 We observe that outage durations tend to peak around September and December, where the median reaches approximately 1,400 minutes. For most months, the median outage duration remains below 1,000 minutes, indicating a seasonal effect in outages.
@@ -177,6 +163,20 @@ To analyze missingness dependency, we will choose a column with non-trivial miss
 To analyze the missingness of `CUSTOMERS.AFFECTED`, we will perform permutation tests to determine whether its missingness depends on other columns in the dataset. We hypothesize that the missingness of `CUSTOMERS.AFFECTED` may depend on `CLIMATE.REGION`, since different regions might have varying reporting standards or data collection processes. If missing values are more prevalent in certain regions, this would suggest a dependency. We also hypothesize that the missingness of `CUSTOMERS.AFFECTED` does not depend on `RES.PRICE`, as electricity prices are unlikely to directly affect whether `CUSTOMERS.AFFECTED` is reported.
 
 **Dependency on `CLIMATE.REGION`:**
+
+| CLIMATE.REGION     |      False |      True |
+|:-------------------|-----------:|----------:|
+| Alaska             | 0.00091659 | 0         |
+| Central            | 0.143905   | 0.0970655 |
+| East North Central | 0.108158   | 0.0451467 |
+| Hawaii             | 0.00458295 | 0         |
+| Northeast          | 0.243813   | 0.189616  |
+| Northwest          | 0.0568286  | 0.158014  |
+| South              | 0.142071   | 0.167043  |
+| Southeast          | 0.131072   | 0.0225734 |
+| Southwest          | 0.0412466  | 0.106095  |
+| West               | 0.12099    | 0.191874  |
+| West North Central | 0.00641613 | 0.0225734 |
 
 *Null Hypothesis*: The distribution of climate regions is the same for missing and non-missing values of `CUSTOMERS.AFFECTED`.
 
