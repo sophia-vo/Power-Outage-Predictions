@@ -8,9 +8,9 @@ Power outages can have significant economic and social impacts, affecting millio
 
 In this project, we analyze a dataset of major power outages in the U.S. to answer the question:
 
-<br/>
+
 **"Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by equipment failure?"**
-<br/>
+
 
 
 Severe weather events, such as hurricanes and storms, are becoming more frequent due to climate change, while equipment failures continue to pose a challenge for power grids. By investigating whether these two causes lead to significantly different outage durations, we can help inform solutions to increase power outage preparedness and help scientists predict the consequences of certain power outages in relation to others. 
@@ -61,10 +61,7 @@ The first few rows of the cleaned dataframe are below:
 |     4 |   2012 |       6 | Minnesota    | East North Central | severe weather     | thunderstorm            |              2550 |                68200 |       11.79 |       2.60681e+06 | 2012-06-19 04:30:00 | 2012-06-20 23:00:00  |
 |     5 |   2015 |       7 | Minnesota    | East North Central | severe weather     | nan                     |              1740 |               250000 |       13.07 |       2.67353e+06 | 2015-07-18 02:00:00 | 2015-07-19 07:00:00  |
 
-
-<br/>
 ### Univariate Analysis:
-<br/>
 
 Understanding the distribution of key variables is important for identifying trends, potential biases, and areas for further investigation. Below, we explore the distributions of **Customers Affected** and **Outage Duration**.
 
@@ -108,7 +105,6 @@ To enhance visibility, we focus on outages lasting less than 10,000 minutes in t
   frameborder="0"
 ></iframe>
 
-<br/>
 ### Bivariate Analysis:
 
 To better understand the relationships between key variables, we explore how **Outage Duration** varies across different causes and months. These insights will help identify trends and guide hypothesis testing.
@@ -225,28 +221,43 @@ A p-value of 0.564 is much larger than the typical significance threshold of 0.0
 
 ## Hypothesis Testing
 
-**Null Hypothesis:** There is no significant difference between the outage duration for outages caused by severe weather and outage duration for outages caused by equipment failure.
-<br/>
-**Alternative Hypothesis:** There is a significant difference between the outage duration for outages caused by severe weather and outage duration for outages caused by equipment failure.
-<br/>
-<br/>
-**Test Statistic:** Difference in means
-  - This is a good choice for this comparison because we are assessing the difference in duration time between two separate, categorical, variables. 
-<br/>
-<br/>
+**Outage Duration and Cause Category:**  
+
+**Hypotheses**  
+- **Null Hypothesis (H0):** There is no difference in the mean outage duration between outages caused by severe weather and equipment failure. Any observed difference is due to random chance.  
+
+- **Alternative Hypothesis (H1):** The mean outage duration differs between outages caused by severe weather and equipment failure.  
+
+**Observed Difference in Means**  
+To test this hypothesis, we first filter the dataset to include only outages caused by **severe weather** and **equipment failure**. We then compute the observed difference in mean outage duration.
+
+**Test Statistic:** Difference in Means
+This is a good choice for this comparison because we are assessing the difference in duration time between two separate, categorical, variables.
+    
 **Significance Level:** 0.05
-  - This is an appropriate significant level as it avoids too many false positives while still asserting confidence
-<br/>
-<br/>
-**p-value**: 0.015
-<br/>
-<br/>
+This is an appropriate significant level as it avoids too many false positives while still asserting confidence
+
+**Permutation Test:**
+
+To determine if this observed difference is statistically significant, we perform a permutation test:
+
+1. Shuffle the `OUTAGE.DURATION` values while keeping the `CAUSE.CATEGORY` labels unchanged.
+2. Compute the difference in mean outage durations for each shuffled dataset.
+3. Repeat this process 1000 times to generate a null distribution.
+4. Calculate the p-value, which represents the proportion of shuffled differences that are as extreme as or more extreme than the observed difference.
+
+*Observed Difference in Means*: 2067.08
+
+*P-value*: 0.0150
+
+*Reject the null hypothesis*: There is evidence of a difference in outage duration between severe weather and equipment failure.
+
 **Conclusion:** With a significance level of alpha=0.05 and a p-value of 0.015, we reject the null hypothesis as the p-value is less than 0.05. Thus, we are 95% confident that there is a significant difference in outage duration between the cause of severe weather and equipment failure.
-<br/>
 
 **Graph:**
+
 <iframe
-  src="assets/Emperical_Distribution.html"
+  src="assets/HT.html"
   width="800"
   height="600"
   frameborder="0"
