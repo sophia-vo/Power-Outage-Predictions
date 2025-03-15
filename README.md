@@ -1,15 +1,17 @@
 # Power-Outage-Predictions
 DSC 80 Final Project at UCSD
 <br/>
-### Introduction
+## Introduction
 
 Power outages can have significant economic and social impacts, affecting millions of people across the United States. Understanding the factors that contribute to outage duration is important for improving infrastructure resilience and emergency response.
 <br/>
 
 In this project, we analyze a dataset of major power outages in the U.S. to answer the question:
+
 <br/>
 **"Is the average outage duration for power outages caused by severe weather equal to the average outage duration for power outages caused by equipment failure?"**
 <br/>
+
 
 Severe weather events, such as hurricanes and storms, are becoming more frequent due to climate change, while equipment failures continue to pose a challenge for power grids. By investigating whether these two causes lead to significantly different outage durations, we can help inform solutions to increase power outage preparedness and help scientists predict the consequences of certain power outages in relation to others. 
 <br/>
@@ -39,8 +41,8 @@ This dataset contains 1,534 rows and provides major power outage data in the 48 
 | TOTAL.CUSTOMERS         | The total number of customers served in the affected area.                     |
 
 
-### Data Cleaning and Exploratory Data Analysis
-**Data Cleaning Steps:**
+## Data Cleaning and Exploratory Data Analysis
+### Data Cleaning Steps:
 <br/>
 
 1. Reading the Data: Loaded the dataset into the notebook using only the columns specified in "Column Information" so that only the columns necessary to our analysis were included. This reduces unnecessary data and ensures efficient processing. We skipped the first five rows to exclude any metadata or headers that might be present in the original file.
@@ -61,91 +63,168 @@ The first few rows of the cleaned dataframe are below:
 
 
 <br/>
-**Univariate Analysis:**
+### Univariate Analysis:
 <br/>
+
+Understanding the distribution of key variables is important for identifying trends, potential biases, and areas for further investigation. Below, we explore the distributions of **Customers Affected** and **Outage Duration**.
+
+**Distribution of Customers Affected**
+
+The histogram below shows the distribution of the number of customers affected by outages. The data is highly skewed, with most outages affecting a relatively small number of customers, while a few extreme cases impact millions. This right-skewed distribution suggests that a log transformation may be useful in modeling.
+
 <iframe
-  src="assets/univariate_plot.html"
+  src="assets/univariate1.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-<br/>
-This plot looks at the distribution of Outage Duration and shows that the distribution of durations is between 0 and 20 thousands. This means that most outages last under 20 thousand minutes. 
 
-<br/>
-**Bivariate Analysis:**
-<br/>
+To better visualize the majority of the data, we limit the x-axis range to 500,000 customers affected in the scaled version below:
+
 <iframe
-  src="assets/bivariate_plot.html"
+  src="assets/univariate2.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-<br/>
-This plot looks at the relationship between outage duration and month. The scatter plot shows that there is no significant relationship between the two variables. 
 
-<br/>
-**Grouped Table:**
-<br/>
+**Distribution of Outage Duration**
+
+The histogram below represents the duration of power outages (in minutes). Similar to customers affected, outage durations are highly skewed, with most outages lasting for a short period while a few last significantly longer. This distribution suggests that extreme events, while rare, can have a significant impact.
+
 <iframe
-  src="assets/GROUPED_TABLE.html"
+  src="assets/univariate3.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-We computed the mean outage duration for each cause category across different climate regions. Then, we converted these values into percentages relative to the total outage duration. In most climate regions, severe weather contributes significantly to power outages. Fuel supply emergencies have a high impact in the East North Central (18.66%) and the South (9.60%), possibly due to extreme cold or supply chain issues. Equipment failure has a significant impact in the East North Central (14.52%), likely due to aging infrastructure or extreme weather-related wear and tear. The consistent percentage of outages due to severe weather suggests that power grids need better resilience against climate-related disruptions. Policymakers can use this data to prioritize investments in infrastructure upgrades, focusing on regions where certain outage causes are more prevalent.
 
-### Assessment of Missingness
-The column CUSTOMERS.AFFECTED in the dataset is likely Not Missing at Random (NMAR) because the likelihood of a value being missing may depend on the actual number of customers affected, which is an unobserved value. For example, if a power company intentionally omits reporting outages that impact a small number of customers or if large-scale outages are prioritized for reporting while smaller ones are left undocumented, the missingness would depend on the value itself.
+To enhance visibility, we focus on outages lasting less than 10,000 minutes in the adjusted histogram:
 
-To determine whether the missingness is  NMAR, additional data would be needed, such as internal reporting policies of utility companies, time thresholds for reporting outages, or metadata on how the data was collected. If the missingness can be explained by another observed column, such as CLIMATE.REGION (e.g., certain regions may have different infrastructure that affect whether customer impact data is recorded; remote or rural areas may have less consistent reporting compared to urban regions). If the missingness of CUSTOMERS.AFFECTED is strongly correlated with CLIMATE.REGION then the missingness could instead be Missing at Random (MAR) rather than NMAR.
+<iframe
+  src="assets/univariate4.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
-To analyze missingness dependency, we will choose a column with non-trivial missingness and determine whether its missingness is dependent on other columns. We will investigate "CUSTOMERS.AFFECTED", which contains missing values. Our goal is to determine if its missingness is:
+<br/>
+### Bivariate Analysis:
+
+To better understand the relationships between key variables, we explore how **Outage Duration** varies across different causes and months. These insights will help identify trends and guide hypothesis testing.
+
+**Outage Duration vs. Cause Category**
+The box plot below displays the distribution of **Outage Duration** across different **Cause Categories**. 
+
+We observe that **Fuel Supply Emergencies** have the longest median outage duration and the widest interquartile range (IQR), spanning approximately **0 to 20,000 minutes**, and **Severe Weather** has many high outliers, indicating that some storms cause extremely prolonged outages. Most cause categories have outage durations concentrated within **0-5,000 minutes**, suggesting that outages are typically short regardless of cause.
+
+<iframe
+  src="assets/bivariate1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+**Outage Duration vs. Month**
+
+The scatter plot below examines how Outage Duration changes by month. 
+
+<iframe
+  src="assets/bivariate2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+For improved visibility a scaled graph with the median outage durations plotted is shown below:
+
+<iframe
+  src="assets/bivariate3.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The red line represents the median outage duration per month, showing fluctuations throughout the year.
+
+We observe that outage durations tend to peak around September and December, where the median reaches approximately 1,400 minutes. For most months, the median outage duration remains below 1,000 minutes, indicating a seasonal effect in outages.
+
+### Interesting Aggregates
+
+To better understand how outage durations vary across different **Cause Categories** and **Climate Regions**, we created a pivot table displaying the **percentage of total outage duration** each combination contributes. The table below shows the percentage of total **outage duration** attributed to each **Cause Category** across different **Climate Regions**. This helps identify regional vulnerabilities to specific causes.
+
+| Central   | East North Central   | Northeast   | Northwest   | South   | Southeast   | Southwest   | West   | West North Central   |
+|:----------|:---------------------|:------------|:------------|:--------|:------------|:------------|:-------|:---------------------|
+| 0.18%     | 14.52%               | 0.12%       | 0.39%       | 0.16%   | 0.30%       | 0.06%       | 0.29%  | 0.03%                |
+| 5.51%     | 18.66%               | 8.04%       | 0.00%       | 9.60%   | 0.00%       | 0.04%       | 3.38%  | 0.00%                |
+| 0.19%     | 1.31%                | 0.11%       | 0.21%       | 0.18%   | 0.28%       | 0.15%       | 0.47%  | 0.01%                |
+| 0.07%     | 0.00%                | 0.48%       | 0.04%       | 0.27%   | 0.00%       | 0.00%       | 0.12%  | 0.04%                |
+| 0.77%     | 0.40%                | 1.46%       | 0.49%       | 0.64%   | 1.57%       | 1.25%       | 1.11%  | 0.24%                |
+| 1.79%     | 2.44%                | 2.43%       | 2.66%       | 2.41%   | 1.46%       | 6.36%       | 1.61%  | 1.34%                |
+| 1.48%     | 1.43%                | 0.42%       | 0.08%       | 0.48%   | 0.09%       | 0.18%       | 0.20%  | 0.00%                |
+
+We computed the mean outage duration for each cause category across different climate regions. Then, we converted these values into percentages relative to the total outage duration. In most climate regions, severe weather contributes significantly to power outages. 
+
+Fuel supply emergencies have a high impact in the East North Central (18.66%) and the South (9.60%), possibly due to extreme cold or supply chain issues. Equipment failure has a significant impact in the East North Central (14.52%), likely due to aging infrastructure or extreme weather-related wear and tear. The consistent percentage of outages due to severe weather suggests that power grids need better resilience against climate-related disruptions. Policymakers can use this data to prioritize investments in infrastructure upgrades, focusing on regions where certain outage causes are more prevalent.
+
+## Assessment of Missingness
+
+The column `CUSTOMERS.AFFECTED` in the dataset is likely Not Missing at Random (NMAR) because the likelihood of a value being missing may depend on the actual number of customers affected, which is an unobserved value. For example, if a power company intentionally omits reporting outages that impact a small number of customers or if large-scale outages are prioritized for reporting while smaller ones are left undocumented, the missingness would depend on the value itself.
+
+To determine whether the missingness is  NMAR, additional data would be needed, such as internal reporting policies of utility companies, time thresholds for reporting outages, or metadata on how the data was collected. If the missingness can be explained by another observed column, such as `CLIMATE.REGION` (e.g., certain regions may have different infrastructure that affect whether customer impact data is recorded; remote or rural areas may have less consistent reporting compared to urban regions). If the missingness of `CUSTOMERS.AFFECTED` is strongly correlated with `CLIMATE.REGION` then the missingness could instead be Missing at Random (MAR) rather than NMAR.
+
+To analyze missingness dependency, we will choose a column with non-trivial missingness and determine whether its missingness is dependent on other columns. We will investigate `CUSTOMERS.AFFECTED`, which contains missing values. Our goal is to determine if its missingness is:
 
 - MCAR (Missing Completely at Random): Missingness is independent of other columns and the missing values themselves.
 - MAR (Missing at Random): Missingness depends on other columns but not on the missing values themselves.
 
-To analyze the missingness of CUSTOMERS.AFFECTED, we will perform permutation tests to determine whether its missingness depends on other columns in the dataset. We hypothesize that the missingness of CUSTOMERS.AFFECTED may depend on CLIMATE.REGION, since different regions might have varying reporting standards or data collection processes. If missing values are more prevalent in certain regions, this would suggest a dependency. We also hypothesize that the missingness of CUSTOMERS.AFFECTED does not depend on RES.PRICE, as electricity prices are unlikely to directly affect whether CUSTOMERS.AFFECTED is reported.
+To analyze the missingness of `CUSTOMERS.AFFECTED`, we will perform permutation tests to determine whether its missingness depends on other columns in the dataset. We hypothesize that the missingness of `CUSTOMERS.AFFECTED` may depend on `CLIMATE.REGION`, since different regions might have varying reporting standards or data collection processes. If missing values are more prevalent in certain regions, this would suggest a dependency. We also hypothesize that the missingness of `CUSTOMERS.AFFECTED` does not depend on `RES.PRICE`, as electricity prices are unlikely to directly affect whether `CUSTOMERS.AFFECTED` is reported.
 
-**Dependency on CLIMATE.REGION:**
+**Dependency on `CLIMATE.REGION`:**
 
-Null Hypothesis: The distribution of climate regions is the same for missing and non-missing values of "CUSTOMERS.AFFECTED".
-Alternative Hypothesis: The missingness of "CUSTOMERS.AFFECTED" is dependent of climate region.
-Test Statistic: Total Variation Distance (TVD) between the distributions of CLIMATE.REGION for missing vs. non-missing values.
+*Null Hypothesis*: The distribution of climate regions is the same for missing and non-missing values of `CUSTOMERS.AFFECTED`.
 
-The Total Variation Distance (TVD) between the distributions of CLIMATE.REGION for missing vs. non-missing CUSTOMERS.AFFECTED is 0.278, which indicates a significant difference between the two distributions.
+*Alternative Hypothesis*: The missingness of `CUSTOMERS.AFFECTED` is dependent of climate region.
+
+*Test Statistic*: Total Variation Distance (TVD) between the distributions of CLIMATE.REGION for missing vs. non-missing values.
+
+The Total Variation Distance (TVD) between the distributions of `CLIMATE.REGION` for missing vs. non-missing `CUSTOMERS.AFFECTED` is 0.278, which indicates a significant difference between the two distributions.
+
 P-value (0.0): Since the p-value is 0.0, we reject the null hypothesis.
 
 <iframe
-  src="assets/MAR_CLIMATE_REGION.html"
+  src="assets/MAR_climate_region.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 
-This means that the missingness of CUSTOMERS.AFFECTED depends on CLIMATE.REGION. The probability that CUSTOMERS.AFFECTED is missing is not random across different climate regions.
-Certain regions (e.g., Northeast, West) have a much higher proportion of missing values compared to others. This suggests that regional factors like data reporting standards, infrastructure, or climate-related outages could be influencing whether CUSTOMERS.AFFECTED is recorded. Since the missingness is tied to an observed variable (CLIMATE.REGION), this is an example of Missing at Random (MAR) rather than Not Missing at Random (NMAR).
+This means that the missingness of `CUSTOMERS.AFFECTED` depends on `CLIMATE.REGION`. The probability that `CUSTOMERS.AFFECTED` is missing is not random across different climate regions.
 
-**Independence from RES.PRICE:**
+Certain regions (e.g., Northeast, West) have a much higher proportion of missing values compared to others. This suggests that regional factors like data reporting standards, infrastructure, or climate-related outages could be influencing whether `CUSTOMERS.AFFECTED` is recorded. Since the missingness is tied to an observed variable (`CLIMATE.REGION`), this is an example of Missing at Random (MAR) rather than Not Missing at Random (NMAR).
 
-Null Hypothesis: The missingness of CUSTOMERS.AFFECTED is independent of RES.PRICE.
-Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED depends on RES.PRICE.
-Test Statistic: Difference in means for missing vs. non-missing values (absolute difference in the average RES.PRICE between rows where CUSTOMERS.AFFECTED).
+**Independence from `RES.PRICE`:**
 
-Observed Difference in Means: 0.102
-P-value: 0.589
+*Null Hypothesis*: The missingness of `CUSTOMERS.AFFECTED` is independent of `RES.PRICE`.
+
+*Alternative Hypothesis*: The missingness of `CUSTOMERS.AFFECTED` depends on `RES.PRICE`.
+
+*Test Statistic*: Difference in means for missing vs. non-missing values (absolute difference in the average `RES.PRICE` between rows where `CUSTOMERS.AFFECTED`).
+
+**Observed Difference in Means**: 0.102
+**P-value**: 0.564
 
 <iframe
-  src="assets/MCAR_RES_PRICE.html"
+  src="assets/MCAR_res_price.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 
-A p-value of 0.589 is much larger than the typical significance threshold of 0.05, so we fail to reject the null hypothesis. This means there is no strong evidence that the missingness of CUSTOMERS.AFFECTED is dependent on RES.PRICE. The missingness of CUSTOMERS.AFFECTED does not appear to be strongly related to the residential electricity price (RES.PRICE). This suggests that the missingness is likely Missing Completely At Random (MCAR) or Missing At Random (MAR) with respect to RES.PRICE. The probability of CUSTOMERS.AFFECTED being missing is not significantly influenced by the value of RES.PRICE.
+A p-value of 0.564 is much larger than the typical significance threshold of 0.05, so we fail to reject the null hypothesis. This means there is no strong evidence that the missingness of `CUSTOMERS.AFFECTED` is dependent on `RES.PRICE`. The missingness of `CUSTOMERS.AFFECTED` does not appear to be strongly related to the residential electricity price (`RES.PRICE`). This suggests that the missingness is likely Missing Completely At Random (MCAR). The probability of `CUSTOMERS.AFFECTED` being missing is not significantly influenced by the value of `RES.PRICE`.
 
+## Hypothesis Testing
 
-### Hypothesis Testing
 **Null Hypothesis:** There is no significant difference between the outage duration for outages caused by severe weather and outage duration for outages caused by equipment failure.
 <br/>
 **Alternative Hypothesis:** There is a significant difference between the outage duration for outages caused by severe weather and outage duration for outages caused by equipment failure.
