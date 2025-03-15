@@ -402,7 +402,7 @@ The observed RMSE difference is |South RMSE - North RMSE|.
 
 **Visualization:** 
 <iframe
-  src="assets/FAIRNESS_GRAPH.html"
+  src="assets/FAIRENESS_GRAPH.html"
   width="800"
   height="600"
   frameborder="0"
