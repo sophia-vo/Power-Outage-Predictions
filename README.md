@@ -222,4 +222,10 @@ Our baseline model predicts CUSTOMERS.AFFECTED using CAUSE.CATEGORY, CLIMATE.REG
 <br/>
 
 **Visualization:** 
+<iframe
+  src="assets/FAIRNESS_GRAPH.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
