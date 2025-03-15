@@ -1,7 +1,7 @@
 # Power Outage Predictions
 DSC 80 Final Project at UCSD
 
-## Introduction
+# Introduction
 
 Power outages can have significant economic and social impacts, affecting millions of people across the United States. Understanding the factors that contribute to outage duration is important for improving infrastructure resilience and emergency response.
 <br/>
@@ -37,7 +37,7 @@ This dataset contains 1,534 rows and provides major power outage data in the 48 
 | TOTAL.CUSTOMERS         | The total number of customers served in the affected area.                     |
 
 
-## Data Cleaning and Exploratory Data Analysis
+# Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning Steps:
 <br/>
 
@@ -149,7 +149,7 @@ We computed the mean outage duration for each cause category across different cl
 
 Fuel supply emergencies have a high impact in the East North Central (18.66%) and the South (9.60%), possibly due to extreme cold or supply chain issues. Equipment failure has a significant impact in the East North Central (14.52%), likely due to aging infrastructure or extreme weather-related wear and tear. The consistent percentage of outages due to severe weather suggests that power grids need better resilience against climate-related disruptions. Policymakers can use this data to prioritize investments in infrastructure upgrades, focusing on regions where certain outage causes are more prevalent.
 
-## Assessment of Missingness
+# Assessment of Missingness
 
 The column `CUSTOMERS.AFFECTED` in the dataset is likely Not Missing at Random (NMAR) because the likelihood of a value being missing may depend on the actual number of customers affected, which is an unobserved value. For example, if a power company intentionally omits reporting outages that impact a small number of customers or if large-scale outages are prioritized for reporting while smaller ones are left undocumented, the missingness would depend on the value itself.
 
@@ -220,7 +220,7 @@ Certain regions (e.g., Northeast, West) have a much higher proportion of missing
 
 A p-value of 0.564 is much larger than the typical significance threshold of 0.05, so we fail to reject the null hypothesis. This means there is no strong evidence that the missingness of `CUSTOMERS.AFFECTED` is dependent on `RES.PRICE`. The missingness of `CUSTOMERS.AFFECTED` does not appear to be strongly related to the residential electricity price (`RES.PRICE`). This suggests that the missingness is likely Missing Completely At Random (MCAR). The probability of `CUSTOMERS.AFFECTED` being missing is not significantly influenced by the value of `RES.PRICE`.
 
-## Hypothesis Testing
+# Hypothesis Testing
 
 **Outage Duration and Cause Category:**  
 
@@ -265,7 +265,7 @@ To determine if this observed difference is statistically significant, we perfor
   frameborder="0"
 ></iframe>
 
-## Framing a Prediction Problem
+# Framing a Prediction Problem
 
 **Prediction Problem:** Estimating the Number of Customers Affected by an Outage
 
@@ -284,7 +284,7 @@ We chose this variable because it can help inform companies when determining wha
 
 These features are known at the time of prediction as outage duration is recorded as soon as the event ends, and the month is always available. Since we only use features that are available at the time of prediction, this ensures our model can make realistic predictions in real-time scenarios.
 
-## Baseline Model
+# Baseline Model
 
 To establish a starting point for our prediction task, we will train a baseline model using two features: `OUTAGE.DURATION` (numerical) and `MONTH` (numerical). 
 
@@ -328,7 +328,7 @@ No, this model is not good because:
 - Tune hyperparameters to optimize model performance.
 
 
-## Final Model
+# Final Model
 
 The features we added were Climate Region and Cause Category because both of these factors influence the number of customers affected. Climate Region will affect customers differently due to different weather elements and infrastructure in different parts of the United States. Cause category can also influence customers because it can influence damages caused to the businesses and also affects customers ability to get to the businesses. Thus, both of these will affect the accuracy of the model because they are additional factors that influence customer behavior. 
 
@@ -365,7 +365,7 @@ The final model made more accurate predictions than the baseline model. The RMSE
 
 This model is generalizable because it improved on the baseline model, which was already generalizable to begin with due to the train-test split, but additionally, this model significantly lowered the RMSE furthering the generalizability because it measures how far the predictions are from the actual values. Thus, a lower RMSE displays more accuracy making the model more generalizable. Additionally, this model is generalizable due to the hyperparameter tuning with cross-validation because it tested the model on different subsets. Finally, once the best hyperparameters are found, the final model is retrained on the entire training set. Hence, the final model is generalizable. 
 
-## Fairness Analysis
+# Fairness Analysis
 
 To determine whether the model performs worse for one group compared to the other, we compare its predictive performance across different climate regions, specifically the Root Mean Squared Error (RMSE) between two groups:
 
