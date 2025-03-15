@@ -1,6 +1,8 @@
 # Power Outage Predictions
 DSC 80 Final Project at UCSD
 
+*Contributers: Sophia Vo, Simone Rao*
+
 # Introduction
 
 Power outages can have significant economic and social impacts, affecting millions of people across the United States. Understanding the factors that contribute to outage duration is important for improving infrastructure resilience and emergency response.
